@@ -7,7 +7,7 @@
 
 
 # Example:
-# ./tools/extract_features_to_npz.py --gpu 0,1,2,3,4,5,6,7 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end/test.prototxt --out test2014_resnet101_faster_rcnn_genome.tsv --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split coco_test2014
+# ./tools/extract_features_to_npz.py --gpu 0,1,2,3,4,5,6,7 --cfg experiments/cfgs/faster_rcnn_end2end_resnet.yml --def models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt --out data/vizwiz/train --net data/faster_rcnn_models/resnet101_faster_rcnn_final.caffemodel --split vizwiz_train
 
 
 import _init_paths
@@ -113,9 +113,9 @@ def get_detections_from_im(net, im_file, image_id, conf_thresh=0.2):
     'image_id': image_id,
     'image_h': np.size(im, 0),
     'image_w': np.size(im, 1),
-    'num_boxes' : len(keep_boxes),
-    'boxes': base64.b64encode(cls_boxes[keep_boxes]),
-    'features': base64.b64encode(pool5[keep_boxes])
+    'num_boxes': len(keep_boxes),
+    'boxes': cls_boxes[keep_boxes],
+    'features': pool5[keep_boxes]
   }
 
 
